@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산 기록 - 자동 계산기</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 네비게이션 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span>📏</span>
+                <span>자동 계산기</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">계산</a></li>
+                <li><a href="history.html" class="active">계산 기록</a></li>
+                <li><a href="about.html">정보</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <h1>📋 계산 기록</h1>
+            <p>저장된 계산 결과를 확인하세요</p>
+        </section>
+
+        <section style="margin: 3rem 0;">
+            <div class="calculator-card">
+                <h2>📁 저장된 기록</h2>
+
+                <div id="historyContainer" style="margin-top: 2rem;">
+                    <p style="text-align: center; color: #718096;">계산 기록이 없습니다</p>
+                </div>
+
+                <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                    <button class="btn btn-secondary" onclick="clearHistory()">모두 삭제</button>
+                    <button class="btn btn-primary" onclick="exportHistory()">📥 내보내기 (CSV)</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 자동 계산기 | 모든 권리 보유</p>
+        </div>
+    </footer>
+
+    <script>
+        function loadHistory() {
+            const history = JSON.parse(localStorage.getItem('calculatorHistory')) || [];
+            const container = document.getElementById('historyContainer');
+
+            if (history.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #718096;">계산 기록이 없습니다</p>';
+                return;
+            }
+
+            let html = '<table style="width: 100%; border-collapse: collapse;">';
+            html += '<thead><tr style="background: #f7fafc; border-bottom: 2px solid #e2e8f0;">';
+            html += '<th style="padding: 1rem; text-align: left; font-weight: 600;">제품명</th>';
+            html += '<th style="padding: 1rem; text-align: left; font-weight: 600;">사이즈</th>';
+            html += '<th style="padding: 1rem; text-align: left; font-weight: 600;">면적</th>';
+            html += '<th style="padding: 1rem; text-align: left; font-weight: 600;">수량</th>';
+            html += '<th style="padding: 1rem; text-align: left; font-weight: 600;">총 금액</th>';
+            html += '<th style="padding: 1rem; text-align: left; font-weight: 600;">날짜</th>';
+            html += '<th style="padding: 1rem; text-align: left; font-weight: 600;">삭제</th>';
+            html += '</tr></thead><tbody>';
+
+            history.forEach((item, index) => {
+                html += '<tr style="border-bottom: 1px solid #e2e8f0;">';
+                html += '<td style="padding: 1rem;">' + item.product + '</td>';
+                html += '<td style="padding: 1rem;">' + item.width + 'cm × ' + item.height + 'cm</td>';
+                html += '<td style="padding: 1rem;">' + item.area.toFixed(2) + 'cm²</td>';
+                html += '<td style="padding: 1rem;">' + item.quantity + '개</td>';
+                html += '<td style="padding: 1rem; font-weight: 600; color: #667eea;">' + item.totalPrice.toLocaleString('ko-KR') + '원</td>';
+                html += '<td style="padding: 1rem; font-size: 0.9rem; color: #718096;">' + item.date + '</td>';
+                html += '<td style="padding: 1rem;"><button class="btn btn-outline" style="flex: none; padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="deleteHistoryItem(' + index + ')">삭제</button></td>';
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        function deleteHistoryItem(index) {
+            if (confirm('이 항목을 삭제하시겠습니까?')) {
+                let history = JSON.parse(localStorage.getItem('calculatorHistory')) || [];
+                history.splice(index, 1);
+                localStorage.setItem('calculatorHistory', JSON.stringify(history));
+                loadHistory();
+            }
+        }
+
+        function clearHistory() {
+            if (confirm('모든 기록을 삭제하시겠습니까? 이 작업은 취소할 수 없습니다.')) {
+                localStorage.removeItem('calculatorHistory');
+                loadHistory();
+            }
+        }
+
+        function exportHistory() {
+            const history = JSON.parse(localStorage.getItem('calculatorHistory')) || [];
+            
+            if (history.length === 0) {
+                alert('내보낼 기록이 없습니다');
+                return;
+            }
+
+            let csv = '제품명,가로(cm),세로(cm),면적(cm²),단가(원/cm²),총금액(원),수량(개),날짜\n';
+            history.forEach(item => {
+                csv += item.product + ',' + item.width + ',' + item.height + ',' + item.area.toFixed(2) + ',' + item.price + ',' + item.totalPrice + ',' + item.quantity + ',"' + item.date + '"\n';
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '계산기록_' + new Date().toISOString().slice(0, 10) + '.csv';
+            link.click();
+        }
+
+        // 페이지 로드 시 기록 표시
+        document.addEventListener('DOMContentLoaded', loadHistory);
+    </script>
+</body>
+</html>
