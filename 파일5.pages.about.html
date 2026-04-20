@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정보 - 자동 계산기</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 네비게이션 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span>📏</span>
+                <span>자동 계산기</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">계산</a></li>
+                <li><a href="history.html">계산 기록</a></li>
+                <li><a href="about.html" class="active">정보</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <h1>ℹ️ 정보</h1>
+            <p>자동 계산기에 대해 알아보세요</p>
+        </section>
+
+        <section style="margin: 3rem 0;">
+            <div class="calculator-card">
+                <h2>📖 자동 계산기란?</h2>
+                <p style="margin: 1rem 0; line-height: 1.8;">자동 계산기는 제품의 가로와 세로 크기를 입력하면 자동으로 면적, 수량, 그리고 총 가격을 계산해주는 웹 애플리케이션입니다. 바나나블라인드, 롤 커튼, 블랙아웃 커튼 등 다양한 제품의 가격을 빠르고 정확하게 계산할 수 있습니다.</p>
+            </div>
+
+            <div class="calculator-card" style="margin-top: 1.5rem;">
+                <h2>🎯 특징</h2>
+                <ul style="margin-left: 1.5rem; line-height: 2;">
+                    <li>⚡ <strong>빠른 계산:</strong> 입력 즉시 결과를 얻을 수 있습니다</li>
+                    <li>📱 <strong>모바일 최적화:</strong> 모든 기기에서 완벽하게 작동합니다</li>
+                    <li>💾 <strong>기록 저장:</strong> 계산한 결과를 자동으로 저장합니다</li>
+                    <li>📥 <strong>내보내기:</strong> 기록을 CSV 파일로 내보낼 수 있습니다</li>
+                    <li>🖨️ <strong>인쇄:</strong> 결과를 직접 인쇄할 수 있습니다</li>
+                    <li>🔐 <strong>개인정보 보호:</strong> 모든 데이터는 브라우저에 로컬로 저장됩니다</li>
+                </ul>
+            </div>
+
+            <div class="calculator-card" style="margin-top: 1.5rem;">
+                <h2>🧮 계산 방식</h2>
+                <p style="margin: 1rem 0;"><strong>1. 면적 계산</strong></p>
+                <p style="margin: 1rem 0; padding: 1rem; background: #f7fafc; border-radius: 8px;">면적 = 가로(cm) × 세로(cm)</p>
+                
+                <p style="margin: 1rem 0;"><strong>2. 총 금액 계산</strong></p>
+                <p style="margin: 1rem 0; padding: 1rem; background: #f7fafc; border-radius: 8px;">총 금액 = 면적(cm²) × 단가(원/cm²)</p>
+                
+                <p style="margin: 1rem 0;"><strong>3. 수량 계산</strong></p>
+                <p style="margin: 1rem 0; padding: 1rem; background: #f7fafc; border-radius: 8px;">수량 = ⌈면적(cm²) ÷ 1000⌉ (올림)</p>
+            </div>
+
+            <div class="calculator-card" style="margin-top: 1.5rem;">
+                <h2>💡 사용 팁</h2>
+                <ul style="margin-left: 1.5rem; line-height: 2;">
+                    <li>정확한 측정값을 입력해야 정확한 결과를 얻을 수 있습니다</li>
+                    <li>계산 결과를 저장하여 나중에 확인할 수 있습니다</li>
+                    <li>여러 제품을 비교할 때 "저장" 기능을 이용하세요</li>
+                    <li>계산 기록 페이지에서 모든 과거 계산을 확인할 수 있습니다</li>
+                </ul>
+            </div>
+
+            <div class="calculator-card" style="margin-top: 1.5rem;">
+                <h2>⚠️ 주의사항</h2>
+                <p style="margin: 1rem 0; padding: 1rem; background: rgba(245, 101, 101, 0.1); border-left: 4px solid #f56565; border-radius: 8px;">
+                    <strong>중요:</strong> 이 계산기는 추정값만 제공합니다. 정확한 가격과 수량은 반드시 판매처에 문의하여 확인하세요. 실제 제품 가격은 추가 요소(배송료, 설치비, 할인 등)에 따라 달라질 수 있습니다.
+                </p>
+            </div>
+
+            <div class="calculator-card" style="margin-top: 1.5rem;">
+                <h2>📞 문의</h2>
+                <p style="margin: 1rem 0;">이 서비스에 대한 의견이나 문제가 있으시면 편하게 연락주세요.</p>
+                <p style="margin: 1rem 0;">📧 Email: support@example.com</p>
+            </div>
+
+            <div class="calculator-card" style="margin-top: 1.5rem;">
+                <h2>📝 버전</h2>
+                <p style="margin: 1rem 0;">자동 계산기 v1.0</p>
+                <p style="margin: 1rem 0; color: #718096;">마지막 업데이트: 2026년 4월 20일</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 자동 계산기 | 모든 권리 보유</p>
+        </div>
+    </footer>
+</body>
+</html>
